@@ -20,5 +20,10 @@ pipeline {
                 sh "mvn compile"
             }
         }
+        stage ('maven test') {
+            steps  {
+                sh "mvn test --DskipTests=true"
+            }
+        }
     }
 }
