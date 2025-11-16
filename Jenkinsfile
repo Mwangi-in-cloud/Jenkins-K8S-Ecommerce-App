@@ -42,5 +42,10 @@ pipeline {
                 } 
             }
         }
+        stage ("now building with maven") {
+            steps {
+                 sh "mvn package -DskipTests=true"
+            }
+        }
     }
 }
