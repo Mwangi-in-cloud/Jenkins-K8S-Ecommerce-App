@@ -25,15 +25,9 @@ pipeline {
                 sh "mvn test -DskipTests=true"
             }
         }
-        stage ("scanning  files") {
+        stage ('trivy file scan') {
             steps {
-                withSonarQubeEnv('sonar') {
-                    sh '''
-                    $SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.projectName=ECommerce \
-                    -Dsonar.projectKey=ECommerce \
-                    -Dsonar.java.binaries=target/classes
-                    '''
+                sh "trivy fs --format table -o trivy-fs-report.html ."
             }
         }
     }
