@@ -25,5 +25,16 @@ pipeline {
                 sh "mvn test -DskipTests=true"
             }
         }
+        stage ("scanning  files") {
+            steps {
+                withSonarQubeEnv('sonar') {
+                    sh '''
+                    $SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectName=ECommerce \
+                    -Dsonar.projectKey=ECommerce \
+                    -Dsonar.java.binaries=target/classes
+                    '''
+            }
+        }
     }
 }
