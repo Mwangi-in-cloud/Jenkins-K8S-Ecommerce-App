@@ -30,5 +30,17 @@ pipeline {
                 sh "trivy fs --format table -o trivy-fs-report.html ."
             }
         }
+        stage ("now to sonar") {
+            steps {
+                    withSonarQubeEnv('sonar') {
+                    sh '''
+                    $SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.projectName=ECommerce \
+                    -Dsonar.projectKey=ECommerce \
+                    -Dsonar.java.binaries=target/classes
+                    '''
+                } 
+            }
+        }
     }
 }
