@@ -54,5 +54,10 @@ pipeline {
                 }  
             }
         }
+        stage ("now docker building") {
+            steps {
+                sh 'docker build -t "$DOCKER_IMAGE:$TAG" .'
+            }
+        }
     }
 }
