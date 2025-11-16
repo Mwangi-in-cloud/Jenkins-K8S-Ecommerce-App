@@ -67,5 +67,12 @@ pipeline {
                }
             }
         }
+        stage ("to k8s") {
+            steps {
+                withKubeConfig(caCertificate: '', clusterName: 'default', contextName: '', credentialsId: 'k8-token', namespace: 'webapps', restrictKubeConfigAccess: false, serverUrl: 'https://172.31.1.113:6443') {
+                 sh "kubectl apply -f deployment-service.yaml -n webapps"
+                }
+            }
+        }
     }
 }
