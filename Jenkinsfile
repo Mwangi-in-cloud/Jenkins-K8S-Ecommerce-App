@@ -15,7 +15,7 @@ pipeline {
                git 'https://github.com/Mwangi-in-cloud/Jenkins-K8S-Ecommerce-App.git' 
             }
         }
-        stage ('maeven compile') {
+        stage ('maven compile') {
             steps {
                 sh "mvn compile"
             }
